@@ -13,21 +13,6 @@ db = SQLAlchemy(app)
 def index():
     return render_template("index.html")
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
-
-
-@app.route("/blog")
-def blog():
-    return render_template("blog.html")
-
-
-@app.route("/blog/<int:id>")
-def blog_post(id):
-    return render_template("blog_post.html")
-
-
 
 @app.route("/about")
 def about():
