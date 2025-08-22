@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+title
+{% endblock %}
+
+{% block body %}
+<h1>This is just a test</h1>
+<p>IDK if this will even work</p>
+<button style="color: yellow">{{value}}</button>
+<p>{{result}}</p>
+<p>{{list}}</p>
+<ul>
+    <!---Just basic style like <li>{{something}}</li>--->
+    {% for item in list %}
+        <li {% if item == 30 %}style="color: red"{%endif%}>{{item}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

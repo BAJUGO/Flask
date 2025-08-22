@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}watafak{%endblock%}
+
+{% block body %}
+    <h1>filters</h1>
+    <p>{{ text|upper }}</p>
+    <p>{{ text|lower }}</p>
+    <p>{{ text|replace('l', 'FUCK') }}</p>
+    <p>{{ text|reverse_string }}</p> <!---This was taken from app.py, thanks to the @app.template_filter--->
+    <p>{{ text|repeat(10)|lower }}</p>
+    <p>{{ text|alternate_case }}</p>
+{% endblock %}

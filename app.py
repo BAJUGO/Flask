@@ -1,11 +1,25 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 
 db = SQLAlchemy(app)
+
+
+@app.route('/filters')
+def filters():
+    text = "hello BEautiful world!"
+    return render_template('filters.html', text=text)
+
+
+@app.route('/test_route')
+def test():
+    value = 'This'
+    result = round(5 + 5.5)
+    my_dictionary = [10,20,30,40]
+    return render_template('test.html', value=value, result=result, list = my_dictionary) # On the left side the thing that in the HTML, so we do a referring, IDK.
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -21,7 +35,8 @@ def hello():
     response.headers['content-type'] = 'text/plain'
     return response
 
-@app.route("/about", methods=['GET', 'POST'])
+
+@app.route("/itdoesntimportentwhatwrittenthere", methods=['GET', 'POST']) # Look at index.html
 def about():
     return render_template("about.html")
 
@@ -43,6 +58,27 @@ def handle_params():
     name = request.args.get('name', 'guest')  # It is better to write args.get because it won't raise an error
     return f"{name}, {greeting}"
 
+
+
+@app.route('/redirect')
+def handle_redirect():
+    return redirect(url_for('about')) # It is obvious what it does, but just for you to understand: it redirects to the about page
+
+
+
+@app.template_filter('reverse_string')
+def reverse(s):
+    return s[::-1]
+
+
+@app.template_filter('repeat')
+def repeat(s, times=2):
+    return f"{s * times}"
+
+
+@app.template_filter('alternate_case')
+def alt(s):
+    return ''.join([c.upper() if i % 2 == 0 else c.lower() for i, c in enumerate(s)])
 
 
 if __name__ == "__main__":
