@@ -6,4 +6,9 @@
 {% block body %}
 <h1>Это уже простой текст. Интересно, смогу ли я запустить</h1>
 <p>Это тоже простейший текст, пупупум</p>
+    <form method="POST" action="{{url_for('index')}}">
+        <input type="text" name="username" placeholder="Username"><br>
+        <input type="text" name="password" placeholder="password"><br>
+        <input type="submit" value="Login">
+    </form>
 {% endblock %}

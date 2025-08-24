@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -8,10 +8,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 db = SQLAlchemy(app)
 
 
-@app.route("/")
-@app.route("/home")
+@app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    if request.method == 'GET':
+        return render_template("index.html")
+    elif request.method == 'POST':
+        return ""
+    else: return ""
 
 
 @app.route("/blog")
